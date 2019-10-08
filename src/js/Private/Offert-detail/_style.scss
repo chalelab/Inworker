@@ -1,0 +1,23 @@
+$margin-right : 20px;
+
+.contact-data {
+    display: flex;
+    div{
+        margin-right: $margin-right;
+    }
+}
+.offert-details-container{
+    padding: 20px;
+    button{
+        margin-left: 10px
+    }
+    .buttons-container{
+        text-align: end;
+    }
+}
+.mapa{
+    width: 400px;
+    height:200px;
+    border-radius: 4px;
+    background: $secondary-color;
+}

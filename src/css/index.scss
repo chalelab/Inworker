@@ -1,0 +1,18 @@
+// Partials
+
+/******common*****/
+@import 'variables';
+@import 'mixins';
+@import 'general';
+@import 'misc';
+
+@import '../js/Public/SignUp/style';
+@import '../js/Public/Home/style';
+@import '../js/Public/Login/style';
+@import '../js/Public/PasswordRecovery/style';
+
+
+@import '../js/Private/Search/style';
+@import '../js/Private/Results/style';
+@import '../js/Private/Offert-detail/style';
+@import '../js/Private/About/style';
