@@ -9,7 +9,7 @@ export default function About(props) {
                 Esta página web fue diseñada para encontrar trabajadores y trabajos
             </Typography>
             <Typography variant='h5'>
-                <b>Creado por:</b>SEBASTIAN ANDRADES - BENJAMIN CHALELA - JEAN PALACIO
+                <b>Creado por: </b>SEBASTIAN ANDRADES - BENJAMIN CHALELA - JEAN PALACIO
             </Typography>
             <Button color='primary'
                 variant='contained'

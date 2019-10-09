@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,9 +18,13 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
 }));
- function MyAppBar(props) {
+
+function MyAppBar(props) {
   const classes = useStyles();
-  console.log('mi app bar props',props);
+  function signout(params) {
+    props.history.replace('/')
+    props.signout()
+  }
 
   return (
     <div className={classes.root}>
@@ -31,8 +35,8 @@ const useStyles = makeStyles(theme => ({
           <Typography variant="h6" className={classes.title}>
             Inworkers
           </Typography>
-          <Button color="inherit" onClick={()=>props.history.push('/about')} >Acerca de esta pagina</Button>
-          <Button color="inherit" onClick={props.signout} >Cerrar sesion</Button>
+          <Button color="inherit" onClick={() => props.history.push('/about')} >Acerca de esta pagina</Button>
+          <Button color="inherit" onClick={signout} >Cerrar sesion</Button>
         </Toolbar>
       </AppBar>
     </div>
