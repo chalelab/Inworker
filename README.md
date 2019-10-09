@@ -1,4 +1,4 @@
-# Inworklers 🛠
+# Inworkers 🛠
 
 Esta plataforma te permitirá contratar albañiles, plomeros y cualquier otro tipo de trabajo temporal que necesites.
 
@@ -21,3 +21,7 @@ See guide on [https://firebase.google.com/docs/hosting/quickstart?hl=es-419](htt
 
 Correr la app en modo desarrollo.<br>
 abrir [http://localhost:3000](http://localhost:3000) 
+
+## enlace a firebase
+
+[https://inworkers-2241d.firebaseapp.com](https://inworkers-2241d.firebaseapp.com)
