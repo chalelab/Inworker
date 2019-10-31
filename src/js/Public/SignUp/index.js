@@ -125,7 +125,7 @@ function SignUp(props) {
             />
           </Grid>
 
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Button
               startIcon=''
               variant="contained"
@@ -134,7 +134,7 @@ function SignUp(props) {
             >
               Cargar foto
           </Button>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <Button
               type="submit"
