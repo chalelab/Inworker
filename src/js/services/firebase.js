@@ -1,5 +1,7 @@
-import { saveToken } from "./storage";
-const apiKey = 'AIzaSyBePNpesPBLXP3BuAoAyq2C0hhByY7R5oU'
+import firebase from 'firebase';
+import { saveToken, saveUserid, getUserid, saveUserInfo } from "./storage";
+const apiKey = 'AIzaSyBePNpesPBLXP3BuAoAyq2C0hhByY7R5oU';
+
 export const login = async (email, password) => {
     try {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
@@ -33,6 +35,8 @@ export const signup = async (email, password) => {
     }
 }
 export const signout = () => {
+    saveUserid('')
+    saveUserInfo({})
     return saveToken('');
 }
 export const passwordRecovery = async (email) => {
@@ -61,4 +65,39 @@ export function traslateFirebaseMessageError(errorMessage) {
         default:
             return errorMessage;
     }
+}
+
+export async function updateUser({ name, avatar ,email}) {
+
+    try {
+        saveUserInfo({avatar,email})
+        const usersCol = firebase.firestore().collection('usuarios');
+        const userCollection = usersCol.doc(getUserid())
+        const _users = await userCollection.set({ avatar }, { merge: true })
+        return { success: true, res: _users };
+
+    } catch (error) {
+        console.log('error get users', error.message);
+        return { success: false, res: error.message };
+    }
+
+}
+
+
+export async function getUser() {
+    try {
+        const id = getUserid()
+        const userCollection = firebase.firestore().collection('usuarios').doc(id)
+        const _users = await userCollection.get()
+        saveUserInfo({
+            email:_users.data().email,
+            avatar:_users.data().avatar
+        })
+        return { success: true, res: _users.data() };
+
+    } catch (error) {
+        console.log('error get users', error.message);
+        return { success: false, res: error.message };
+    }
+
 }

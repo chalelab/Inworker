@@ -11,8 +11,8 @@ import { SnackbarContentWrapper } from '../../utils/SnackbarContentWrapper';
 
 import Logo from './../../utils/Logo';
 import Loading from './../../utils/Loading';
-import { signup } from './../../services/firebase';
-import { saveToken } from '../../services/storage';
+import { signup, updateUser } from './../../services/firebase';
+import { saveToken, saveUserid } from '../../services/storage';
 
 function SignUp(props) {
   const [variant, setVariant] = React.useState('');
@@ -34,6 +34,8 @@ function SignUp(props) {
 
         if (success) {
           saveToken(res.idToken)
+          saveUserid(res.localId)
+          await updateUser({email,avatar:"https://spng.pngfly.com/20190328/he/kisspng-black-white-m-chandigarh-product-design-font-c-user-svg-png-icon-free-download-177426-online-5c9d947d94b306.0045060215538310376091.jpg"})
           setVariant('success');
           setMessage('Cuenta creada exitosamente');
           setTimeout(() => {
