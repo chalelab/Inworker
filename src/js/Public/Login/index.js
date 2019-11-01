@@ -12,7 +12,7 @@ import { SnackbarContentWrapper } from '../../utils/SnackbarContentWrapper';
 import Logo from './../../utils/Logo';
 import Loading from './../../utils/Loading';
 import { login, getUser } from './../../services/firebase';
-import { saveToken, saveUserid } from '../../services/storage';
+import { saveToken, saveUserid, saveIdToken } from '../../services/storage';
 
 function Login(props) {
   const [variant, setVariant] = React.useState('');

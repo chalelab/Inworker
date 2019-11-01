@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid, Typography, Card, TextField, Button } from '@material-ui/core'
 import { getUser, updateUser, getUserById, updateUserById, changeEmail } from '../../services/firebase';
+import { getIdToken, getToken } from '../../services/storage';
 
-class UserEdit extends React.Component {
+class EditProfile extends React.Component {
     state = {
         email: '',
         name: ''
@@ -26,6 +27,7 @@ class UserEdit extends React.Component {
         const { id } = this.props.match.params;
         const { name, email } = this.state;
         await updateUserById(id, { name, email })
+        changeEmail({email,id:getToken()})
 
     }
     render() {
@@ -52,4 +54,4 @@ class UserEdit extends React.Component {
         )
     }
 }
-export default UserEdit;
+export default EditProfile;

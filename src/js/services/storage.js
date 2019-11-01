@@ -23,6 +23,9 @@ export function getUserInfo() {
         avatar,
     }
 }
+export function saveIdToken(idToken) {
+    sessionStorage.setItem('IdToken', idToken);
+}
 
 export function getUserid() {
     return sessionStorage.getItem('userId');
@@ -31,6 +34,9 @@ export function getUserid() {
 
 export function getToken() {
     return sessionStorage.getItem('token');
+}
+export function getIdToken() {
+    return sessionStorage.getItem('IdToken');
 }
 
 export async function uploadFileToFirebase(file) {

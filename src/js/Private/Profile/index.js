@@ -1,9 +1,21 @@
 import React from 'react';
 import { Grid, Typography, Avatar, Button, Input, CircularProgress } from '@material-ui/core'
-import { uploadFileToFirebase,getUserInfo } from '../../services/storage';
+import {
+    Card,
+    IconButton,
+    CardContent,
+    CardActions,
+    CardMedia
+} from '@material-ui/core';
+import { AccessAlarm, ThreeDRotation, Edit } from '@material-ui/icons';
+
+import { uploadFileToFirebase, getUserInfo,getUserid,getIdToken } from '../../services/storage';
 import { updateUser } from '../../services/firebase';
-export default function Profile(params) {
+export default function Profile(props) {
     const inputRef = React.createRef();
+    const goToEdit = () => {
+        props.history.push(`/edit-profile/${getUserid()}`)
+    }
 
     const [image, setImage] = React.useState(null);
     const [uploading, setUploading] = React.useState(false);
@@ -20,7 +32,7 @@ export default function Profile(params) {
             if (success) {
                 await updateUser({ avatar: res.url })
             } else {
-                console.log('error subiendo',res);
+                console.log('error subiendo', res);
             }
         }
         reader.readAsDataURL(file)
@@ -59,6 +71,9 @@ export default function Profile(params) {
             <Typography variant="h3">
                 {getUserInfo().email}
             </Typography>
+            <IconButton aria-label="edit" onClick={goToEdit}>
+               Modificar <Edit />
+            </IconButton>
         </div>
     )
 }
