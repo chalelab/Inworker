@@ -80,6 +80,7 @@ export async function updateUser({ name, avatar ,email}) {
       console.log('error get users', error.message);
       return { success: false, res: error.message };
   }
+}
 
 /**
  * @returns {{res:[{email:String,id:String}],success:Boolean}}}
@@ -135,7 +136,7 @@ export async function getUserById(id) {
     }
 
 }
-export async function updateUser(id,{name}) {
+export async function updateUserById(id,{name}) {
     try {
         const userCollection = firebase.firestore().collection('usuarios').doc(id)
         const _users = await userCollection.update({name})
