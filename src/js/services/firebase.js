@@ -1,5 +1,6 @@
+import firebase from 'firebase';
 import { saveToken } from "./storage";
-const apiKey = 'AIzaSyBePNpesPBLXP3BuAoAyq2C0hhByY7R5oU'
+const apiKey = 'AIzaSyBePNpesPBLXP3BuAoAyq2C0hhByY7R5oU';
 export const login = async (email, password) => {
     try {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
@@ -62,3 +63,54 @@ export function traslateFirebaseMessageError(errorMessage) {
             return errorMessage;
     }
 }
+/**
+ * @returns {{res:[{email:String,id:String}],success:Boolean}}}
+ */
+export async function getUsers() {
+    try {
+        const userCollection = firebase.firestore().collection('usuarios')
+        const _users = await userCollection.get()
+        const users = [];
+        _users.forEach(doc => {
+            const docData = doc.data()
+            users.push({ email: docData.email, id: doc.id,name:docData.name })
+
+        })
+        console.log(users);
+        return { success: true, res: users };
+
+
+    } catch (error) {
+        console.log('error get users', error.message);
+        return { success: false, res: error.message };
+    }
+
+}
+/**
+
+ */
+export async function getUser(id) {
+    try {
+        const userCollection = firebase.firestore().collection('usuarios').doc(id)
+        const _users = await userCollection.get()
+        return { success: true, res: _users.data() };
+
+    } catch (error) {
+        console.log('error get users', error.message);
+        return { success: false, res: error.message };
+    }
+
+}
+export async function updateUser(id,{name}) {
+    try {
+        const userCollection = firebase.firestore().collection('usuarios').doc(id)
+        const _users = await userCollection.update({name})
+        return { success: true, res: _users };
+
+    } catch (error) {
+        console.log('error get users', error.message);
+        return { success: false, res: error.message };
+    }
+
+}
+
