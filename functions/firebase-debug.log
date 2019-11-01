@@ -1,0 +1,28 @@
+[debug] [2019-10-25T04:15:02.677Z] ----------------------------------------------------------------------
+[debug] [2019-10-25T04:15:02.681Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Jetobe\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve --only functions
+[debug] [2019-10-25T04:15:02.681Z] CLI Version:   6.5.0
+[debug] [2019-10-25T04:15:02.681Z] Platform:      win32
+[debug] [2019-10-25T04:15:02.681Z] Node Version:  v11.12.0
+[debug] [2019-10-25T04:15:02.683Z] Time:          Thu Oct 24 2019 23:15:02 GMT-0500 (GMT-05:00)
+[debug] [2019-10-25T04:15:02.683Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-25T04:15:02.700Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-25T04:15:02.700Z] > authorizing via signed-in user
+[debug] [2019-10-25T04:15:02.700Z] [iam] checking project inworkers-2241d for permissions ["firebase.projects.get"]
+[debug] [2019-10-25T04:15:02.705Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/inworkers-2241d:testIamPermissions  
+
+[debug] [2019-10-25T04:15:13.564Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-25T04:15:13.569Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/inworkers-2241d  
+ 
+[debug] [2019-10-25T04:15:14.631Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'E:\Documents\Js\Sebastian'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-10-25T04:15:16.320Z] Fetching environment
+[debug] [2019-10-25T04:15:16.326Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1055751489893:getServerAppConfig  
+ 
+[debug] [2019-10-25T04:15:17.299Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-25T04:15:17.299Z] Starting @google-cloud/functions-emulator
+[debug] [2019-10-25T04:15:20.370Z] Parsing function triggers
+[info] +  functions: updateUser: http://localhost:5000/inworkers-2241d/us-central1/updateUser
