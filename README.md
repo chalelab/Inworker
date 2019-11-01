@@ -17,7 +17,7 @@ See guide on [https://firebase.google.com/docs/hosting/quickstart?hl=es-419](htt
 ## Script para probar de manera local
 
 
-### `npm start`
+### `npm start `
 
 Correr la app en modo desarrollo.<br>
 abrir [http://localhost:3000](http://localhost:3000) 
