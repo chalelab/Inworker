@@ -36,6 +36,7 @@ function MyAppBar(props) {
             Inworkers
           </Typography>
           <Button color="inherit" onClick={() => props.history.push('/profile')} >Perfil</Button>
+          <Button color="inherit" onClick={() => props.history.push('/users')} >Usuarios</Button>
           <Button color="inherit" onClick={() => props.history.push('/about')} >Acerca de esta pagina</Button>
           <Button color="inherit" onClick={signout} >Cerrar sesion</Button>
         </Toolbar>

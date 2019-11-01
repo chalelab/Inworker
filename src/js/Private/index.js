@@ -7,6 +7,8 @@ import OffertDetails from './Offert-detail';
 import About from './About';
 import Updates from './Updates';
 import Profile from './Profile';
+import Users from './Users';
+import UserEdit from './Users/user-edit';
 /**
  * 
  * Rutas privadas 
@@ -22,6 +24,8 @@ function Private(props) {
         <Route path="/about" component={About} />
         <Route path="/updates" component={Updates} />
         <Route path="/profile" component={Profile} />
+        <Route path="/users" component={Users} />
+        <Route path="/user-edit/:id" component={UserEdit} />
         {/* <Redirect to='/' /> */}
       </BrowserRouter>
     </main>

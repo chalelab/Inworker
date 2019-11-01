@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import { saveToken, saveUserid, getUserid, saveUserInfo } from "./storage";
 const apiKey = 'AIzaSyBePNpesPBLXP3BuAoAyq2C0hhByY7R5oU';
 
+
 export const login = async (email, password) => {
     try {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
@@ -75,6 +76,27 @@ export async function updateUser({ name, avatar ,email}) {
         const userCollection = usersCol.doc(getUserid())
         const _users = await userCollection.set({ avatar }, { merge: true })
         return { success: true, res: _users };
+    }  catch (error) {
+      console.log('error get users', error.message);
+      return { success: false, res: error.message };
+  }
+
+/**
+ * @returns {{res:[{email:String,id:String}],success:Boolean}}}
+ */
+export async function getUsers() {
+    try {
+        const userCollection = firebase.firestore().collection('usuarios')
+        const _users = await userCollection.get()
+        const users = [];
+        _users.forEach(doc => {
+            const docData = doc.data()
+            users.push({ email: docData.email, id: doc.id,name:docData.name })
+
+        })
+        console.log(users);
+        return { success: true, res: users };
+
 
     } catch (error) {
         console.log('error get users', error.message);
@@ -92,7 +114,19 @@ export async function getUser() {
         saveUserInfo({
             email:_users.data().email,
             avatar:_users.data().avatar
-        })
+        })}
+        catch (error) {
+          console.log('error get users', error.message);
+          return { success: false, res: error.message };
+      }
+    }
+/**
+
+ */
+export async function getUserById(id) {
+    try {
+        const userCollection = firebase.firestore().collection('usuarios').doc(id)
+        const _users = await userCollection.get()
         return { success: true, res: _users.data() };
 
     } catch (error) {
@@ -101,3 +135,16 @@ export async function getUser() {
     }
 
 }
+export async function updateUser(id,{name}) {
+    try {
+        const userCollection = firebase.firestore().collection('usuarios').doc(id)
+        const _users = await userCollection.update({name})
+        return { success: true, res: _users };
+
+    } catch (error) {
+        console.log('error get users', error.message);
+        return { success: false, res: error.message };
+    }
+
+}
+
