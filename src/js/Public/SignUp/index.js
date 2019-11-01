@@ -8,12 +8,31 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Snackbar from '@material-ui/core/Snackbar';
 import { SnackbarContentWrapper } from '../../utils/SnackbarContentWrapper';
-
+import firestore from "./../../services/firestore";
 import Logo from './../../utils/Logo';
 import Loading from './../../utils/Loading';
 import { signup } from './../../services/firebase';
 import { saveToken } from '../../services/storage';
 
+function submitt(){
+  this.handleSubmit();
+  this.agregarusuario();
+}
+const agregarusuario = e => {
+  e.preventDefault();
+  const db = firestore.firestore();
+  db.settings({
+    timestampsInSnapshots: true
+  });
+  const userRef = db.collection("usuarios").add({
+    fullname: this.state.fullname,
+    email: this.state.email
+  });  
+  this.setState({
+    email: "",
+    password: "",
+  });
+};
 function SignUp(props) {
   const [variant, setVariant] = React.useState('');
   const [message, setMessage] = React.useState('');
@@ -72,7 +91,7 @@ function SignUp(props) {
         <Loading />
       }
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitt}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <Logo />
