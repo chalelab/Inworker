@@ -1,0 +1,31 @@
+.profile-container{
+   
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    input{
+        display: none;
+    }
+}
+
+.profile-img{
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    position:absolute;
+}
+.image-container{
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
