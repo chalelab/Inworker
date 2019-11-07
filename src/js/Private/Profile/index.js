@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Avatar, Button, Input, CircularProgress } from '@material-ui/core'
+import { Grid, Typography, Avatar, Button, Input, CircularProgress, Divider } from '@material-ui/core'
 import {
     Card,
     IconButton,
@@ -9,8 +9,9 @@ import {
 } from '@material-ui/core';
 import { AccessAlarm, ThreeDRotation, Edit } from '@material-ui/icons';
 
-import { uploadFileToFirebase, getUserInfo,getUserid,getIdToken } from '../../services/storage';
+import { uploadFileToFirebase, getUserInfo, getUserid, getIdToken } from '../../services/storage';
 import { updateUser } from '../../services/firebase';
+import stars from '../../../assets/stars.png'
 export default function Profile(props) {
     const inputRef = React.createRef();
     const goToEdit = () => {
@@ -38,9 +39,90 @@ export default function Profile(props) {
         reader.readAsDataURL(file)
     }
 
+    const renderStars = () => {
+        return (
+            <div className="rating-container" >
+                <img src={stars} alt="rating" />
+            </div>)
+
+    }
+
     return (
         <div container className='profile-container'>
-            <Typography variant="h3">
+            <div className="left-side">
+                <div className="image-container">
+                    <img
+                        className="profile-img"
+                        alt="perfil"
+                        src={image ? image : getUserInfo().avatar}
+                    />
+                    {uploading ? <CircularProgress className="progress" /> : null}
+
+                </div>
+                <input
+                    className="input-pick-photo"
+                    accept="image/png, image/jpeg"
+                    type="file"
+                    ref={inputRef}
+                    onChange={handleImageChage}
+                />
+                <Button
+                    className="button-change-image"
+                    color="primary"
+                    variant="contained"
+                    onClick={() => inputRef.current.click()}
+                >
+                    Cambiar Foto
+            </Button>
+
+                <Typography variant="h5">
+                    E-mail {getUserInfo().email}
+                </Typography>
+                <Typography variant="h5">
+                    Teléfono XXXXX
+                </Typography>
+                <IconButton aria-label="edit" onClick={goToEdit}>
+                    Modificar <Edit />
+                </IconButton> 
+    
+                <div className="info-container">
+                    {renderStars()}
+                    <Divider />
+                    <Typography variant="h5">
+                        Calificación
+                     </Typography>
+                    {renderStars()}
+                    <Divider />
+                    <Typography variant="h5">
+                        Ex nisi occaecat minim et.
+                     </Typography>
+                    {renderStars()}
+                    <Divider />
+                    <Typography variant="h5">
+                        Ut aute magna aute et magna laborum consequat.
+                     </Typography>
+                </div>
+            </div>
+
+            <div className="rigth-side">
+                <Typography variant="h3" >Calificación y comentarios</Typography>
+                <Typography variant="body1">
+                    Deserunt veniam consectetur quis magna et ut cupidatat magna ex cupidatat irure non. Minim nulla et exercitation fugiat dolor pariatur consequat ullamco in laborum et culpa tempor. Ea Lorem sit officia non esse. Dolor et anim tempor occaecat qui qui in magna nisi cupidatat. Ullamco do voluptate proident eu ullamco sint excepteur in. Nulla mollit voluptate laborum do ipsum sunt est incididunt cillum occaecat nulla et irure.
+               </Typography>
+
+                <Divider className="divider" />
+                <Typography variant="body1">
+                    Deserunt veniam consectetur quis magna et ut cupidatat magna ex cupidatat irure non. Minim nulla et exercitation fugiat dolor pariatur consequat ullamco in laborum et culpa tempor. Ea Lorem sit officia non esse. Dolor et anim tempor occaecat qui qui in magna nisi cupidatat. Ullamco do voluptate proident eu ullamco sint excepteur in. Nulla mollit voluptate laborum do ipsum sunt est incididunt cillum occaecat nulla et irure.
+               </Typography>
+                <Divider className="divider" />
+
+                <Typography variant="body1">
+                    Deserunt veniam consectetur quis magna et ut cupidatat magna ex cupidatat irure non. Minim nulla et exercitation fugiat dolor pariatur consequat ullamco in laborum et culpa tempor. Ea Lorem sit officia non esse. Dolor et anim tempor occaecat qui qui in magna nisi cupidatat. Ullamco do voluptate proident eu ullamco sint excepteur in. Nulla mollit voluptate laborum do ipsum sunt est incididunt cillum occaecat nulla et irure.
+               </Typography>
+                <Divider className="divider" />
+
+            </div>
+            {/* <Typography variant="h3">
                 Perfil
             </Typography>
             <div className="image-container">
@@ -73,7 +155,7 @@ export default function Profile(props) {
             </Typography>
             <IconButton aria-label="edit" onClick={goToEdit}>
                Modificar <Edit />
-            </IconButton>
+            </IconButton> */}
         </div>
     )
 }
