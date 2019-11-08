@@ -6,10 +6,10 @@ export default function Updated(params) {
         <div container className='about-container'>
         <Logo/>
             <Typography variant='h4'>
-                <b>Proximas actualizaciones:</b>
+                <b>Próximas actualizaciones:</b>
             </Typography>
             <Typography variant='h5'>
-               Se agregarán cambios proximanente
+               Se agregarán cambios proximamente
             </Typography>
         </div>
     )
