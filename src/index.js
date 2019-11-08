@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './css/index.scss';
 import Main from './js';
 import * as serviceWorker from './serviceWorker';
-import  firebase from 'firebase';
+import firebase from 'firebase';
+import { Provider } from './js/services/AuthContext';
 
 const config = {
     apiKey: "AIzaSyBePNpesPBLXP3BuAoAyq2C0hhByY7R5oU",
@@ -20,5 +21,9 @@ firebase.initializeApp(config)
 firebase.analytics();
 
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider>
+        <Main />
+    </Provider>,
+    document.getElementById('root'));
 serviceWorker.unregister();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Card } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import Logo from '../../utils/Logo'
 export default function Updated(params) {
     return (

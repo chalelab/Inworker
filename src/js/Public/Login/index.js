@@ -12,7 +12,7 @@ import { SnackbarContentWrapper } from '../../utils/SnackbarContentWrapper';
 import Logo from './../../utils/Logo';
 import Loading from './../../utils/Loading';
 import { login, getUser } from './../../services/firebase';
-import { saveToken, saveUserid, saveIdToken } from '../../services/storage';
+import { saveToken, saveUserid } from '../../services/storage';
 
 function Login(props) {
   const [variant, setVariant] = React.useState('');
@@ -26,13 +26,13 @@ function Login(props) {
     evt.preventDefault();
     if (email && password) {
       const { res, success } = await login(email, password)
-      setOpenSnackbar(true);
-
+      
       if (success) {
         saveToken(res.idToken)
         saveUserid(res.localId)
-       const userData = await  getUser()
-       console.log(userData);
+        const userData = await  getUser()
+        console.log(userData);
+        setOpenSnackbar(true);
         setVariant('success')
         setMessage('Ingreso correcto');
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Typography, Card, TextField, Button } from '@material-ui/core'
-import { getUser, updateUser, getUserById, updateUserById, changeEmail } from '../../services/firebase';
+import { TextField, Button } from '@material-ui/core'
+import { getUserById, updateUserById } from '../../services/firebase';
 
 class UserEdit extends React.Component {
     state = {

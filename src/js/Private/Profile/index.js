@@ -1,15 +1,11 @@
 import React from 'react';
-import { Grid, Typography, Avatar, Button, Input, CircularProgress, Divider } from '@material-ui/core'
+import {  Typography, Button, CircularProgress, Divider } from '@material-ui/core'
 import {
-    Card,
     IconButton,
-    CardContent,
-    CardActions,
-    CardMedia
 } from '@material-ui/core';
-import { AccessAlarm, ThreeDRotation, Edit } from '@material-ui/icons';
+import { Edit } from '@material-ui/icons';
 
-import { uploadFileToFirebase, getUserInfo, getUserid, getIdToken } from '../../services/storage';
+import { uploadFileToFirebase, getUserInfo, getUserid } from '../../services/storage';
 import { updateUser } from '../../services/firebase';
 import stars from '../../../assets/stars.png'
 export default function Profile(props) {
@@ -48,7 +44,7 @@ export default function Profile(props) {
     }
 
     return (
-        <div container className='profile-container'>
+        <div  className='profile-container'>
             <div className="left-side">
                 <div className="image-container">
                     <img
