@@ -1,0 +1,24 @@
+%displayFlex {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-ofert-container {
+    padding: 20px 20px;
+    height: 100vh;
+    @extend %displayFlex;
+    
+    .create-ofert-title{
+        margin-bottom: 10px;
+    }
+    .input-container{
+        margin-bottom: 10px;
+    }
+
+    .buttons-container{
+        margin-top: 20px;
+        .MuiButtonBase-root{
+            margin-right: 20px;
+        }
+    }
+}

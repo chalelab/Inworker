@@ -7,7 +7,7 @@ import { TextField, Grid, Menu, MenuItem, Button } from '@material-ui/core';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 
-function Search(params) {
+function Search(props) {
     const [search, setSearch] = useState('');
     const [goToResult, setGoToResult] = useState(false);
 
@@ -42,6 +42,7 @@ function Search(params) {
                 <Button
                     color="secondary"
                     variant="contained"
+                    onClick={()=>props.history.push("/create-offert")}
                     
                     className='add-ofert-button'>
                     Agregar oferta

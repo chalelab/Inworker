@@ -10,6 +10,8 @@ import Profile from './Profile';
 import Users from './Users';
 import UserEdit from './Users/user-edit';
 import EditProfile from './Profile/user-edit';
+import CreateOffertPage from './create-offert';
+
 /**
  * 
  * Rutas privadas 
@@ -30,6 +32,7 @@ function Private(props) {
           <Route path="/users" component={Users} />
           <Route path="/user-edit/:id" component={UserEdit} />
           <Route path="/edit-profile/:id" component={EditProfile} />
+          <Route path="/create-offert" component={CreateOffertPage} />
         </div>
         {/* <Redirect to='/' /> */}
       </BrowserRouter>
