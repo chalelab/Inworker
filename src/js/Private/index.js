@@ -11,6 +11,7 @@ import Users from './Users';
 import UserEdit from './Users/user-edit';
 import EditProfile from './Profile/user-edit';
 import CreateOffertPage from './create-offert';
+import MyOfferts from './my-offerts/my-oferts';
 
 /**
  * 
@@ -22,7 +23,6 @@ function Private(props) {
       <BrowserRouter>
         <PrivateAppBar signout={props.signout} />
         <div style={{ marginTop: 64 }}>
-
           <Route path="/" exact component={Search} />
           <Route path="/results" component={Results} />
           <Route path="/offert-details" component={OffertDetails} />
@@ -33,6 +33,7 @@ function Private(props) {
           <Route path="/user-edit/:id" component={UserEdit} />
           <Route path="/edit-profile/:id" component={EditProfile} />
           <Route path="/create-offert" component={CreateOffertPage} />
+          <Route path="/my-offerts" component={MyOfferts} />
         </div>
         {/* <Redirect to='/' /> */}
       </BrowserRouter>

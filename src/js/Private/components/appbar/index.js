@@ -53,6 +53,7 @@ function MyAppBar(props) {
             Inworkers
           </Typography>
           <Button color="inherit" onClick={() => props.history.push('/users')} >Usuarios</Button>
+          <Button color="inherit" onClick={() => props.history.push('/my-offerts')} >Mis ofertas</Button>
           <Button color="inherit" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >Cuenta</Button>
           <Menu
             onBackdropClick={handleClose()}
