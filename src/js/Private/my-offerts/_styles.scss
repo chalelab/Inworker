@@ -1,12 +1,8 @@
-%displayFlex {
+
+.my-offerts-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-.my-offerts-container{
     padding: 20px 10px;
     min-height: 100vh;
-    @extend %displayFlex;
-
 }
