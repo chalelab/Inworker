@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Logo from '../../../assets/inworkers.jpeg'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
@@ -14,36 +14,34 @@ function Search(props) {
     if (goToResult) {
         return <Redirect to='/results' />
     }
+    function searchOfferts(event) {
+        event.preventDefault();
+        props.history.push(`results?search=${String(search).toLowerCase()}`)
+
+    }
     return (
-        <Grid  component="main" className='search-container' >
+        <Grid component="main" className='search-container' >
             <img src={Logo} className={'logo'} alt='Logo' />
-            <div className='search-input-container'>
+            <form className='search-input-container' onSubmit={searchOfferts}>
                 <TextField
                     id="outlined-name"
-                    label="Busca trabajos disponibles"
-                    // className={classes.textField}
+                    label="Buscar oferta"
                     fullWidth
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                     margin="normal"
                     variant="outlined"
                 />
-                <Button
-                    onClick={ ()=>setGoToResult(true)}
-                    color="secondary">
-                    Buscar
-                </Button>
-
-            </div>
-            <Grid item sm={12} >
+            </form>
+            {/* <Grid item sm={12} >
                 <MenuPopupState />
-            </Grid>
+            </Grid> */}
             <Grid item sm={12}>
                 <Button
                     color="secondary"
                     variant="contained"
-                    onClick={()=>props.history.push("/create-offert")}
-                    
+                    onClick={() => props.history.push("/create-offert")}
+
                     className='add-ofert-button'>
                     Agregar oferta
                 </Button>

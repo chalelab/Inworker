@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { withRouter } from 'react-router-dom'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,22 +27,49 @@ function MyAppBar(props) {
     props.history.replace('/')
     props.signout()
   }
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (route) => () => {
+    setAnchorEl(null);
+    if (route) props.history.push(route)
+  };
+  const close = ()=>{
+    if(anchorEl){
+      setAnchorEl(null);
+    }
+  }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
       <AppBar position="fixed" >
         <Toolbar>
           {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
           </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} onClick={()=>props.history.push("/")}>
             Inworkers
           </Typography>
-          <Button color="inherit" onClick={() => props.history.push('/profile')} >Perfil</Button>
           <Button color="inherit" onClick={() => props.history.push('/users')} >Usuarios</Button>
-          <Button color="inherit" onClick={() => props.history.push('/about')} >Acerca de esta pagina</Button>
-          <Button color="inherit" onClick={signout} >Cerrar sesion</Button>
+          <Button color="inherit" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >Cuenta</Button>
+          <Menu
+            onBackdropClick={handleClose()}
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted={false}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            
+          >
+            <MenuItem dense  onClick={handleClose("/profile")}>Perfil</MenuItem>
+            <MenuItem dense onClick={handleClose("/about")}>Acerca de esta pagina</MenuItem>
+            <MenuItem dense onClick={signout}>Cerrar sesión</MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
+
     </div>
   );
 }

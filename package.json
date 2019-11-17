@@ -8,6 +8,7 @@
     "firebase": "^7.2.2",
     "lodash": "^4.17.15",
     "material-ui-popup-state": "^1.4.1",
+    "query-string": "^6.9.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-router-dom": "5.0.1",
