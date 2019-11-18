@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, TextField, Button, CircularProgress,TextareaAutosize } from '@material-ui/core'
+import { Typography, TextField, Button, CircularProgress, TextareaAutosize } from '@material-ui/core'
 import queryString from 'query-string'
 import OffertService from '../../services/offerts';
 import OfertModel from '../../models/offert';
@@ -7,6 +7,7 @@ import OfertModel from '../../models/offert';
 export default function CreateOffertPage(props) {
     const offertService = new OffertService()
     const [title, setTitle] = React.useState("");
+    const [details, setDetails] = React.useState("");
     const [price, setPrice] = React.useState(0);
     const [headingText, setHeadingText] = React.useState("Crea una oferta");
     const [loading, setLoading] = React.useState(false);
@@ -18,9 +19,10 @@ export default function CreateOffertPage(props) {
         if (isEditing) {
             setTitle(offertModel.title)
             setPrice(offertModel.price)
+            setDetails(offertModel.details)
             setHeadingText(`Editando oferta: ${offertModel.title}`);
         }
-    }, [isEditing, offertModel.title, offertModel.price])
+    }, [isEditing, offertModel.title, offertModel.price, offertModel.details])
 
 
 
@@ -28,7 +30,7 @@ export default function CreateOffertPage(props) {
         event.preventDefault();
 
         if (isEditing) {
-            const r = await offertService.updateOffert(new OfertModel({ title, price, id: offertModel.id }))
+            const r = await offertService.updateOffert(new OfertModel({ title, price, id: offertModel.id, details }))
             if (r.success) {
                 props.history.goBack()
             } else {
@@ -36,7 +38,7 @@ export default function CreateOffertPage(props) {
             }
         } else {
 
-            const _ofertModel = new OfertModel({ title, price })
+            const _ofertModel = new OfertModel({ title, price, details })
             setLoading(true)
             const r = await offertService.createOffert(_ofertModel)
             setLoading(false)
@@ -84,6 +86,27 @@ export default function CreateOffertPage(props) {
                     value={price}
 
                 />
+                <TextField
+                    name="details"
+                    label="Detalle de la oferta"
+                    className="input-container"
+                    onChange={e => setDetails(e.target.value)}
+                    value={details}
+                    multiline
+                    rowsMax="4"
+                    variant="outlined"
+                />
+                {/* <TextField
+                    id="filled-multiline-flexible"
+                    label="Multiline"
+                    multiline
+                    rowsMax="4"
+                    value={value}
+                    onChange={handleChange}
+                    className={classes.textField}
+                    margin="normal"
+                    variant="filled"
+                /> */}
                 <div className="buttons-container">
                     {loading && <CircularProgress />}
                     {!loading && <>

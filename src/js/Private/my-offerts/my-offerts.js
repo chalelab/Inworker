@@ -35,8 +35,12 @@ export default function MyOfferts(props) {
             }
         }
     }
+     /**
+     * 
+     * @param {OfertModel} offert 
+     */
     const editOffert = (offert) => () => {
-        props.history.push(`my-offerts-edit?id=${offert.id}&title=${offert.title}&price=${offert.price}`)
+        props.history.push(`my-offerts-edit?id=${offert.id}&title=${offert.title}&price=${offert.price}&details=${offert.details}`)
 
     }
 

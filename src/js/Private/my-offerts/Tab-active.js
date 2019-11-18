@@ -21,6 +21,7 @@ export default function Tab1(props) {
                                         key={offert.id}
                                         title={offert.title}
                                         price={offert.price}
+                                        details={offert.details}
                                         onDelete={props.onDelete(offert)}
                                         onEdit={props.onEdit(offert)}
                                     />
