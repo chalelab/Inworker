@@ -11,7 +11,7 @@ import Users from './Users';
 import UserEdit from './Users/user-edit';
 import EditProfile from './Profile/user-edit';
 import CreateOffertPage from './create-offert';
-import MyOfferts from './my-offerts/my-oferts';
+import MyOfferts from './my-offerts/my-offerts';
 
 /**
  * 

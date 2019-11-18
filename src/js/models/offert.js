@@ -1,10 +1,10 @@
 
 export default class OfertModel {
-    constructor({ id, title, userId, status, date, price }) {
+    constructor({ id, title, userId, active, date, price }) {
         this.id = id;
         this.title = title;
         this.userId = userId;
-        this.status = status
+        this.active = active;
         this.date = date;
         this.price = price;
     }

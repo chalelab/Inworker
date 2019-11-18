@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import _ from 'lodash';
 import OfertModel from "../models/offert";
 import { mapResponse } from '../utils/mapResponse';
+import { getUserid } from './storage';
 
 export default class OffertService {
 
@@ -17,6 +18,8 @@ export default class OffertService {
         try {
             const response = await this.offertsCollection.add({
                 title: String(offert.title).toLowerCase(),
+                active: true,
+                userId: getUserid(),
                 ...offert.toObject(),
                 keywords: [
                     ...new Set(
@@ -76,6 +79,22 @@ export default class OffertService {
 
             })
             console.log('_offerts', _oferts);
+            return mapResponse(true, _oferts)
+        } catch (error) {
+            return mapResponse(false, error.message)
+
+        }
+    }
+    async getMyOfferts() {
+        try {
+            const _oferts = []
+            const _offert = await this.offertsCollection.where("userId", "==", getUserid()).get()
+            _offert.forEach((r) => {
+                const offertModel = new OfertModel({ id: r.id, ...r.data() })
+                _oferts.push(offertModel);
+
+            })
+            console.log('findMyOfferts', _oferts);
             return mapResponse(true, _oferts)
         } catch (error) {
             return mapResponse(false, error.message)
