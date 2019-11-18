@@ -53,11 +53,12 @@ function Results(props) {
                     key={offert.id}
                     onClick={onClick(offert)}
                     title={offert.title}
+                    price={offert.price}
                 />)
         })
     )
 }
-function ResultItem({ title, onClick }) {
+function ResultItem({ title, onClick,price }) {
     return (
         <Grid item xs={12} onClick={onClick} className="result-item-container">
             <Paper className="result-item-content" >
@@ -65,10 +66,7 @@ function ResultItem({ title, onClick }) {
                     {title}
                 </Typography>
                 <Typography >
-                    Lugar: Nogales
-            </Typography>
-                <Typography >
-                    Fecha: 2012-12
+                    Por: {price}
             </Typography>
                 <div className={'button-container'}>
                     <Button variant="contained" color="secondary" onClick={onClick}>

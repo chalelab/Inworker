@@ -47,14 +47,14 @@ class Provider extends React.Component {
     offerts: []
   }
   async  componentDidMount() {
-    this.setState({ loading: true })
     await this.getMyOfferts()
-    this.setState({ loading: false })
   }
 
   getMyOfferts = async () => {
     const offertService = new OffertService();
+    this.setState({ loading: true })
     const response = await offertService.getMyOfferts()
+    this.setState({ loading: false })
     if (response.success) {
       this.setState({ offerts: response.res })
     } else {
@@ -67,7 +67,8 @@ class Provider extends React.Component {
     const { offerts, loading } = this.state;
     const value = {
       offerts,
-      loading
+      loading,
+      getOfferts: this.getMyOfferts,
     }
     return (
       <OffertContext.Provider

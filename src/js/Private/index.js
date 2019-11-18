@@ -34,6 +34,7 @@ function Private(props) {
           <Route path="/edit-profile/:id" component={EditProfile} />
           <Route path="/create-offert" component={CreateOffertPage} />
           <Route path="/my-offerts" component={MyOfferts} />
+          <Route path="/my-offerts-edit" component={CreateOffertPage} />
         </div>
         {/* <Redirect to='/' /> */}
       </BrowserRouter>

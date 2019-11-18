@@ -5,10 +5,8 @@ import Container from '@material-ui/core/Container'
 
 export default function EmptyOffertList() {
     return (
-        <Container>
-            <Grid alignItems="center" >
-                <Typography>No tienes ofertas</Typography>
-            </Grid>
-        </Container>
+        <div>
+            <Typography>No tienes ofertas</Typography>
+        </div>
     )
 }

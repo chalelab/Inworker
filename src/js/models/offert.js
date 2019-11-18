@@ -11,12 +11,8 @@ export default class OfertModel {
 
     toObject() {
         return ({
-            // id: this.id,
             title: this.title,
-            price: this.price
-            // userId: this.userId,
-            // status: this.status,
-            // date: this.date,
+            price: this.price,
         })
 
     }

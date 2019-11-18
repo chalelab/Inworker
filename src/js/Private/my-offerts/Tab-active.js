@@ -7,17 +7,23 @@ import EmptyOffertList from './components/empty-list';
 export default function Tab1(props) {
     return (
         <Consumer>
-            {(props) => {
-                const offertsActive = _.filter(props.offerts, (offert) => offert.active);
-                if(_.isEmpty(offertsActive)){
-                    return <EmptyOffertList/>
+            {({ offerts }) => {
+                const offertsActive = _.filter(offerts, (offert) => offert.active);
+                if (_.isEmpty(offertsActive)) {
+                    return <EmptyOffertList />
                 }
                 return (
                     <div className="my-offerts-container">
                         {
                             _.map(offertsActive, (offert) => {
                                 return (
-                                    <OffertItem key={offert.id} />
+                                    <OffertItem
+                                        key={offert.id}
+                                        title={offert.title}
+                                        price={offert.price}
+                                        onDelete={props.onDelete(offert)}
+                                        onEdit={props.onEdit(offert)}
+                                    />
                                 )
                             })
                         }

@@ -1,31 +1,58 @@
 import React from 'react';
-import { Typography, TextField, Button, CircularProgress } from '@material-ui/core'
+import { Typography, TextField, Button, CircularProgress,TextareaAutosize } from '@material-ui/core'
+import queryString from 'query-string'
 import OffertService from '../../services/offerts';
 import OfertModel from '../../models/offert';
 
 export default function CreateOffertPage(props) {
+    const offertService = new OffertService()
     const [title, setTitle] = React.useState("");
     const [price, setPrice] = React.useState(0);
+    const [headingText, setHeadingText] = React.useState("Crea una oferta");
     const [loading, setLoading] = React.useState(false);
 
+    const offert = queryString.parse(props.location.search);
+    const offertModel = new OfertModel(offert);
+    const isEditing = !!offertModel.id;
+    React.useEffect(() => {
+        if (isEditing) {
+            setTitle(offertModel.title)
+            setPrice(offertModel.price)
+            setHeadingText(`Editando oferta: ${offertModel.title}`);
+        }
+    }, [isEditing, offertModel.title, offertModel.price])
+
+
+
     async function createOffert(event) {
-        event.preventDefault()
-        const offertService = new OffertService()
-        const _ofertModel = new OfertModel({ title, price })
-        setLoading(true)
-        const r = await offertService.createOffert(_ofertModel)
-        setLoading(false)
-        console.log('createOffert', r);
-        if (r.success) {
-            props.history.goBack()
+        event.preventDefault();
+
+        if (isEditing) {
+            const r = await offertService.updateOffert(new OfertModel({ title, price, id: offertModel.id }))
+            if (r.success) {
+                props.history.goBack()
+            } else {
+                alert("No se pudo editar su oferta")
+            }
         } else {
+
+            const _ofertModel = new OfertModel({ title, price })
+            setLoading(true)
+            const r = await offertService.createOffert(_ofertModel)
+            setLoading(false)
+            console.log('createOffert', r);
+            if (r.success) {
+                props.history.goBack()
+            } else {
+                alert("No se pudo crear su oferta")
+            }
 
         }
     }
 
     return (
         <div className="create-ofert-container">
-            <Typography variant="h3" className="create-ofert-title">Crea una oferta</Typography>
+            <Typography variant="h3" className="create-ofert-title">{headingText}</Typography>
             <form
                 onSubmit={createOffert}
                 className="create-ofert-container">
@@ -40,6 +67,7 @@ export default function CreateOffertPage(props) {
                     id="password"
                     className="input-container"
                     onChange={e => setTitle(e.target.value)}
+                    value={title}
 
                 />
 
@@ -53,6 +81,8 @@ export default function CreateOffertPage(props) {
                     id="password"
                     className="input-container"
                     onChange={e => setPrice(e.target.value)}
+                    value={price}
+
                 />
                 <div className="buttons-container">
                     {loading && <CircularProgress />}
