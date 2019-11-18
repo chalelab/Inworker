@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import { withRouter } from 'react-router-dom'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -37,12 +36,6 @@ function MyAppBar(props) {
     setAnchorEl(null);
     if (route) props.history.push(route)
   };
-  const close = ()=>{
-    if(anchorEl){
-      setAnchorEl(null);
-    }
-  }
-
   return (
     <div className={classes.root} >
       <AppBar position="fixed" >

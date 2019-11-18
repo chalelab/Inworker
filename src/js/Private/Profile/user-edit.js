@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Typography, Card, TextField, Button } from '@material-ui/core'
-import { getUser, updateUser, getUserById, updateUserById, changeEmail } from '../../services/firebase';
-import { getIdToken, getToken } from '../../services/storage';
+import { TextField, Button } from '@material-ui/core'
+import { getUserById, updateUserById, changeEmail } from '../../services/firebase';
+import { getToken } from '../../services/storage';
 
 class EditProfile extends React.Component {
     state = {

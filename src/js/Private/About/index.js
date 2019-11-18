@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Button } from '@material-ui/core'
+import { Typography, Button } from '@material-ui/core'
 import Logo from '../../utils/Logo'
 export default function About(props) {
     return (

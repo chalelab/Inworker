@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import Logo from '../../../assets/inworkers.jpeg'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-import { TextField, Grid, Menu, MenuItem, Button } from '@material-ui/core';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { TextField, Grid, Button } from '@material-ui/core';
 
 
 function Search(props) {
     const [search, setSearch] = useState('');
-    const [goToResult, setGoToResult] = useState(false);
+    const [goToResult] = useState(false);
 
     if (goToResult) {
         return <Redirect to='/results' />
@@ -50,21 +48,4 @@ function Search(props) {
     )
 }
 
-function MenuPopupState() {
-    return (
-        <PopupState variant="popover" popupId="demo-popup-menu">
-            {popupState => (
-                <React.Fragment>
-                    <Button variant="contained" color='primary' {...bindTrigger(popupState)}>
-                        Barranquilla
-                    <ArrowDropDownIcon />
-                    </Button>
-                    <Menu {...bindMenu(popupState)}>
-                        <MenuItem onClick={popupState.close}>Barranquilla</MenuItem>
-                    </Menu>
-                </React.Fragment>
-            )}
-        </PopupState>
-    );
-}
 export default Search
