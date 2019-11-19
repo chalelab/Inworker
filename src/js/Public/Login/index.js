@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Snackbar from '@material-ui/core/Snackbar';
 import { SnackbarContentWrapper } from '../../utils/SnackbarContentWrapper';
-import firestore from "./../../services/firestore";
 
 import Logo from './../../utils/Logo';
 import Loading from './../../utils/Loading';
@@ -23,38 +22,17 @@ function Login(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- 
-  function submitt(){
-    this.handleSubmit();
-    this.agregarusuario();
-    
-  }
-  const agregarusuario = e => {
-    e.preventDefault();
-    const db = firestore.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
-    const userRef = db.collection("usuarios").add({
-      fullname: this.state.fullname,
-      email: this.state.email
-    });  
-    this.setState({
-      email: "",
-      password: "",
-    });
-  };
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     if (email && password) {
       const { res, success } = await login(email, password)
-      setOpenSnackbar(true);
-
+      
       if (success) {
         saveToken(res.idToken)
         saveUserid(res.localId)
-       const userData = await  getUser()
-       console.log(userData);
+        const userData = await  getUser()
+        console.log(userData);
+        setOpenSnackbar(true);
         setVariant('success')
         setMessage('Ingreso correcto');
 

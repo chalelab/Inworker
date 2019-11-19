@@ -17,7 +17,7 @@ function OffertDetails(props) {
     }
     return (
         <Grid container component='main' spacing={2} className={'offert-details-container'}>
-            <Grid item sm={8}>
+            <Grid item sm={12}>
                 <Typography variant="h4">Titulo de la oferta</Typography>
             </Grid>
             <Grid item sm={10} >

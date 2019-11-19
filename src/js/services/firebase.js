@@ -35,6 +35,23 @@ export const signup = async (email, password) => {
         return { success: false, res: error.message }
     }
 }
+export const changeEmail = async ({email,id}) => {
+    try {
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${apiKey}`
+        const body = JSON.stringify({ email, returnSecureToken: true,idToken:id });
+        const jsonResponse = await fetch(url, { method: 'POST', body })
+        const response = await jsonResponse.json()
+        console.log('change email',response)
+        if (response.idToken) {
+            return { success: true, res: response }
+        } else {
+            return { success: false, res: traslateFirebaseMessageError(response.error.message) }
+
+        }
+    } catch (error) {
+        return { success: false, res: error.message }
+    }
+}
 export const signout = () => {
     saveUserid('')
     saveUserInfo({})
@@ -80,6 +97,7 @@ export async function updateUser({ name, avatar ,email}) {
       console.log('error get users', error.message);
       return { success: false, res: error.message };
   }
+}
 
 /**
  * @returns {{res:[{email:String,id:String}],success:Boolean}}}
@@ -135,7 +153,7 @@ export async function getUserById(id) {
     }
 
 }
-export async function updateUser(id,{name}) {
+export async function updateUserById(id,{name}) {
     try {
         const userCollection = firebase.firestore().collection('usuarios').doc(id)
         const _users = await userCollection.update({name})

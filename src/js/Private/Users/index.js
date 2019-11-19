@@ -24,11 +24,8 @@ class Users extends React.Component {
     mapUserList = () => {
         const { users } = this.state;
         return users.map(user => {
-            if (user.email) {
                 return (<UserItem email={user.email} key={user.id} id={user.id} name={user.name}/>)
-            } else {
-                return null;
-            }
+            
         })
     }
 

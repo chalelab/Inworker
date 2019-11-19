@@ -1,9 +1,9 @@
 import React from 'react';
-import { Grid, Typography, Card, Button } from '@material-ui/core'
+import { Typography, Button } from '@material-ui/core'
 import Logo from '../../utils/Logo'
 export default function About(props) {
     return (
-        <div container className='about-container'>
+        <div  className='about-container'>
             <Logo />
             <Typography variant='h4'>
                 Esta página web fue diseñada para encontrar trabajadores y trabajos

@@ -1,20 +1,17 @@
 import React from 'react';
 import {
-    Grid,
     Typography,
     Card,
-    GridListTile,
     CardHeader,
     IconButton,
     CardContent,
     CardActions,
-    CardMedia
 } from '@material-ui/core'
-import { AccessAlarm, ThreeDRotation, Edit } from '@material-ui/icons';
-import {withRouter} from 'react-router-dom'
+import { Edit } from '@material-ui/icons';
+import { withRouter } from 'react-router-dom'
 
-function UserItem({ email, id,name, ...props }) {
-    
+function UserItem({ email, id, name, ...props }) {
+
     const goToEdit = () => {
 
         props.history.push(`/user-edit/${id}`)
