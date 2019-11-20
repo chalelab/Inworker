@@ -5,7 +5,7 @@ import { Provider, Consumer } from '../../services/OffertContext'
 import OffertItem from './components/offert-item';
 import Tab1 from './Tab-active';
 import Tab2 from './Tab-inactive';
-import OfertModel from '../../models/offert';
+import { OfertModel } from '../../models';
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
@@ -35,10 +35,10 @@ export default function MyOfferts(props) {
             }
         }
     }
-     /**
-     * 
-     * @param {OfertModel} offert 
-     */
+    /**
+    * 
+    * @param {OfertModel} offert 
+    */
     const editOffert = (offert) => () => {
         props.history.push(`my-offerts-edit?id=${offert.id}&title=${offert.title}&price=${offert.price}&details=${offert.details}`)
 

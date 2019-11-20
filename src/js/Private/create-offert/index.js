@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, TextField, Button, CircularProgress, TextareaAutosize } from '@material-ui/core'
 import queryString from 'query-string'
 import OffertService from '../../services/offerts';
-import OfertModel from '../../models/offert';
+import { OfertModel } from '../../models';
 
 export default function CreateOffertPage(props) {
     const offertService = new OffertService()
