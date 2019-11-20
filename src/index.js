@@ -6,20 +6,20 @@ import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase';
 import { Provider } from './js/services/AuthContext';
 
-const config = {
-    apiKey: "AIzaSyBePNpesPBLXP3BuAoAyq2C0hhByY7R5oU",
-    authDomain: "inworkers-2241d.firebaseapp.com",
-    databaseURL: "https://inworkers-2241d.firebaseio.com",
-    projectId: "inworkers-2241d",
-    storageBucket: "inworkers-2241d.appspot.com",
-    messagingSenderId: "1055751489893",
-    appId: "1:1055751489893:web:a36a2078dbd20b0302f98c",
-    measurementId: "G-2TVDG9MPYN"
+export const config = {
+    apiKey: process.env.REACT_APP_APIKEY,
+    authDomain: process.env.REACT_APP_AUTHDOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASEURL,
+    projectId: process.env.REACT_APP_PROJECTID,
+    storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+    appId: process.env.REACT_APP_APPID,
+    measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
 
 firebase.initializeApp(config)
 firebase.analytics();
-
+console.log(process.env)
 
 ReactDOM.render(
     <Provider>
