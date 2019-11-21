@@ -45,8 +45,9 @@ function MyAppBar(props) {
           <Typography variant="h6" className={classes.title} onClick={()=>props.history.push("/")}>
             Inworkers
           </Typography>
-          <Button color="inherit" onClick={() => props.history.push('/users')} >Usuarios</Button>
+          <Button color="inherit" onClick={() => props.history.push('/my-services')} >Mis servicios</Button>
           <Button color="inherit" onClick={() => props.history.push('/my-offerts')} >Mis ofertas</Button>
+          <Button color="inherit" onClick={() => props.history.push('/users')} >Usuarios</Button>
           <Button color="inherit" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >Cuenta</Button>
           <Menu
             onBackdropClick={handleClose()}

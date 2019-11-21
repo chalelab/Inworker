@@ -9,12 +9,11 @@ function Results(props) {
     const [loading, setLoading] = React.useState(true);
     const [results, setResults] = React.useState([]);
     const { search } = queryString.parse(props.location.search)
-    console.log({ search });
     const onClick = (offert) => () => {
-        props.history.push('/offert-details')
+        const params = queryString.stringify(offert);
+        props.history.push(`/offert-details?${params}`)
     }
     React.useEffect(() => {
-
         searchOfferts(search)
     }, [search])
 

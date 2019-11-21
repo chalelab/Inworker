@@ -19,8 +19,6 @@ export const config = {
 
 firebase.initializeApp(config)
 firebase.analytics();
-console.log(process.env)
-
 ReactDOM.render(
     <Provider>
         <Main />

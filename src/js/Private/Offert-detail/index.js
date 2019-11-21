@@ -1,24 +1,40 @@
 import React, { useState } from 'react';
-import { Grid, Typography, Avatar, Button, Snackbar, CircularProgress } from '@material-ui/core'
+import queryString from 'query-string';
+import _ from 'lodash';
+import { Grid, Typography, Avatar, Button, Snackbar, CircularProgress, Badge } from '@material-ui/core'
 import { Map } from '@material-ui/icons';
+import { OfertModel, ServiceModel } from '../../models';
+import OffertService from '../../services/offerts';
+import ServiceService from '../../services/service';
+import { getUserid } from '../../services/storage';
 
 function OffertDetails(props) {
+    const search = queryString.parse(props.location.search)
+    const offertModel = new OfertModel({ ...search });
 
+    const offertService = new OffertService();
+    const serviceService = new ServiceService();
     const [showSnack, setShowSnack] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    function applyOffert() {
+    async function applyOffert() {
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
+        const offertResult = await offertService.closeOffert(offertModel);
+        const servRespose = await serviceService.createService(new ServiceModel({ price: offertModel.price, title: offertModel.title, userId_own: offertModel.userId, user_guest: getUserid() }))
+        setLoading(false);
+        if (offertResult.success && servRespose.success) {
             setShowSnack(true)
-        }, 2000)
+
+        } else {
+            alert("No pudo aplicar su oferta. Intente mas tarde")
+            console.log(offertResult, servRespose);
+        }
 
     }
     return (
         <Grid container component='main' spacing={2} className={'offert-details-container'}>
             <Grid item sm={12}>
-                <Typography variant="h4">Titulo de la oferta</Typography>
+                <Typography variant="h4">{offertModel.title}</Typography>
             </Grid>
             <Grid item sm={10} >
                 <div className="contact-data">
@@ -40,10 +56,8 @@ function OffertDetails(props) {
             <Grid item sm={12}>
                 <Typography>Cosas por hacer</Typography>
                 <ul>
-                    <li>Actividad 1</li>
-                    <li>Actividad 2</li>
+                    <li>{offertModel.details}</li>
                 </ul>
-                <Typography>Do consequat excepteur cillum nulla dolore officia consectetur Lorem enim laborum. Culpa cupidatat reprehenderit laborum dolor incididunt esse sit ullamco Lorem. Ex ullamco quis adipisicing eu dolor tempor exercitation exercitation nulla elit. Sunt tempor ea sit quis magna sint enim. Commodo elit est consequat aute deserunt sunt sit sint elit velit dolore.</Typography>
             </Grid>
 
             <Grid item sm={12}>
@@ -52,7 +66,9 @@ function OffertDetails(props) {
             </Grid>
             <Grid item sm={12}>
                 <Typography variant='h5'>Etiquetas</Typography>
-                <Typography variant='h6'>Albanil,Pared, Barranquilla</Typography>
+                <Typography variant='caption'>
+                    {_.map(offertModel.keywords, (keyword) => (` ${keyword}, `)).slice(3, 7)}
+                </Typography>
             </Grid>
             <Grid item sm={12} className="buttons-container" >
                 <Button

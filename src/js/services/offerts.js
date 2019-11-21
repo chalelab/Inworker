@@ -67,6 +67,20 @@ export default class OffertService {
 
         }
     }
+    /**
+     * 
+     * @param {OfertModel} offert 
+     */
+    async closeOffert(offert) {
+        try {
+            const _offert = this.offertsCollection.doc(offert.id)
+            await _offert.set({ active: false }, { merge: true })
+            return mapResponse(true, "ok")
+        } catch (error) {
+            return mapResponse(false, error.message)
+
+        }
+    }
 
     /**
      * 
