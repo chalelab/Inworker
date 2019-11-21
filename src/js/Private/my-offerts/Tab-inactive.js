@@ -25,6 +25,7 @@ export default function Tab2(props) {
                                         details={offert.details}
                                         onDelete={props.onDelete(offert)}
                                         onEdit={props.onEdit(offert)}
+                                        onOpen={props.onOpen(offert)}
                                     />
                                 )
                             })

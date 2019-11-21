@@ -32,7 +32,7 @@ function Private(props) {
           <Route path="/updates" component={Updates} />
           <Route path="/profile" component={Profile} />
           <Route path="/users" component={Users} />
-          <Route path="/user-edit/:id" component={UserEdit} />
+          <Route path="/user-edit" component={UserEdit} />
           <Route path="/edit-profile/:id" component={EditProfile} />
           <Route path="/create-offert" component={CreateOffertPage} />
           <Route path="/my-offerts" component={MyOfferts} />

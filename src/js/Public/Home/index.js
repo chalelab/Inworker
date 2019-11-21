@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Logo from '../../utils/Logo';
 
 function Home() {
+  
   const inworkerBold = <b>Inworkers.</b>
   return (
     <Grid container component="main" className="container">

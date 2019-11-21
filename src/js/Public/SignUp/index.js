@@ -11,8 +11,9 @@ import { SnackbarContentWrapper } from '../../utils/SnackbarContentWrapper';
 
 import Logo from './../../utils/Logo';
 import Loading from './../../utils/Loading';
-import { signup, updateUser } from './../../services/firebase';
-import { saveToken, saveUserid } from '../../services/storage';
+import { signup, updateUser, createUser } from './../../services/firebase';
+import { saveToken, saveUserid, saveUserInfo } from '../../services/storage';
+import { UserModel } from '../../models';
 
 function SignUp(props) {
   const [variant, setVariant] = React.useState('');
@@ -21,6 +22,7 @@ function SignUp(props) {
   const [loading] = React.useState(false);
 
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -35,7 +37,9 @@ function SignUp(props) {
         if (success) {
           saveToken(res.idToken)
           saveUserid(res.localId)
-          await updateUser({email,avatar:"https://spng.pngfly.com/20190328/he/kisspng-black-white-m-chandigarh-product-design-font-c-user-svg-png-icon-free-download-177426-online-5c9d947d94b306.0045060215538310376091.jpg"})
+          const userModel = new UserModel({ id: res.localId, email, name, avatar: "https://spng.pngfly.com/20190328/he/kisspng-black-white-m-chandigarh-product-design-font-c-user-svg-png-icon-free-download-177426-online-5c9d947d94b306.0045060215538310376091.jpg" })
+          await createUser(userModel);
+          saveUserInfo(userModel)
           setVariant('success');
           setMessage('Cuenta creada exitosamente');
           setTimeout(() => {
@@ -84,6 +88,20 @@ function SignUp(props) {
               Crea tu cuenta
               </Typography>
           </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="Nombre"
+              label="Nombre"
+              name="email"
+              autoComplete="email"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+          </Grid>
+
           <Grid item xs={12}>
             <TextField
               variant="outlined"
