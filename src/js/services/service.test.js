@@ -8,10 +8,10 @@ beforeEach(() => {
     serviceService = new ServiceService()
 })
 
-test('Creacion de ofertas', async () => {
+test('Creacion', async () => {
     const service = new ServiceModel({});
     const resul = await serviceService.createService(service);
-    expect(resul).toEqual(mapResponse(true,))
+    expect(resul).toEqual(mapResponse(true,{}))
 })
 
 

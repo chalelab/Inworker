@@ -6,7 +6,7 @@ jest.mock("firebase", () => ({
     firestore() {
         return {
             collection: () => ({
-                add: jest.fn(),
+                add: jest.fn(()=>({})),
                 doc: jest.fn(() => ({ set: () => { }, delete: () => { } })),
             })
         }
