@@ -31,7 +31,6 @@ function Login(props) {
         saveToken(res.idToken)
         saveUserid(res.localId)
         const userData = await  getUser()
-        console.log(userData);
         setOpenSnackbar(true);
         setVariant('success')
         setMessage('Ingreso correcto');

@@ -18,7 +18,7 @@ function Search(props) {
 
     }
     return (
-        <Grid component="main" className='search-container' >
+        <div component="main" className='search-container' >
             <img src={Logo} className={'logo'} alt='Logo' />
             <form className='search-input-container' onSubmit={searchOfferts}>
                 <TextField
@@ -34,7 +34,7 @@ function Search(props) {
             {/* <Grid item sm={12} >
                 <MenuPopupState />
             </Grid> */}
-            <Grid item sm={12}>
+            <div item sm={12}>
                 <Button
                     color="secondary"
                     variant="contained"
@@ -43,8 +43,8 @@ function Search(props) {
                     className='add-ofert-button'>
                     Agregar oferta
                 </Button>
-            </Grid>
-        </Grid>
+            </div>
+        </div>
     )
 }
 

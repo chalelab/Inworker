@@ -1,6 +1,6 @@
 
 export default class OfertModel {
-    constructor({ id, title, userId, active, date, price, details }) {
+    constructor({ id, title, userId, active, date, price, details, keywords = [] }) {
         this.id = id;
         this.title = title;
         this.userId = userId;
@@ -8,6 +8,7 @@ export default class OfertModel {
         this.date = date;
         this.price = price;
         this.details = details;
+        // this.keywords = keywords;
     }
 
     toObject() {
