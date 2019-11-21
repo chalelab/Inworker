@@ -11,20 +11,20 @@ beforeEach(() => {
 test('Creacion de ofertas', async () => {
     const offert = new OfertModel({});
     const resul = await offertService.createOffert(offert);
-    expect(resul).toEqual(mapResponse(true,))
+    expect(resul).toEqual(mapResponse(true, {}))
 })
 
 
 test("Actualizacion", async () => {
     const offert = new OfertModel({})
     const resul = await offertService.updateOffert(offert);
-    expect(resul).toEqual(mapResponse(true,"ok"))
+    expect(resul).toEqual(mapResponse(true, "ok"))
 })
 
 test("Eliminado", async () => {
     const offert = new OfertModel({})
     const resul = await offertService.deleteOffert(offert);
-    expect(resul).toEqual(mapResponse(true,"ok"))
+    expect(resul).toEqual(mapResponse(true, "ok"))
 
 })
 
