@@ -54,8 +54,8 @@ export default function MyServices(props) {
                     variant="fullWidth"
                     value={value}
                     onChange={handleChange} aria-label="simple tabs example" width="100%">
-                    <Tab label="Activas" {...a11yProps(0)} />
-                    <Tab label="Cerradas" {...a11yProps(1)} />
+                    <Tab label="Creados por mi" {...a11yProps(0)} />
+                    <Tab label="De otros" {...a11yProps(1)} />
                 </Tabs>
                 <Consumer>
                     {({ loading, getMyServices }) => {

@@ -85,7 +85,7 @@ class OffertDetails extends React.Component {
 
     render() {
         const { loading, showSnack, comment, comments, sendingComment, loadingComments } = this.state;
-        
+
         return (
             <Grid container component='main' className={'offert-details-container'}>
                 <Grid item sm={12} >
@@ -113,13 +113,8 @@ class OffertDetails extends React.Component {
                         <li>{this.offertModel.details}</li>
                     </ul>
                 </Grid>
-                <Grid item sm={12}>
-                    <Typography variant='h5'>Etiquetas</Typography>
-                    <Typography variant='caption'>
-                        {_.map(this.offertModel.keywords, (keyword) => (` ${keyword}, `)).slice(3, 7)}
-                    </Typography>
-                </Grid>
-                <Grid item sm={12} className="buttons-container" >
+
+                <Grid item sm={12} md={12} lg={12} className="" style={{ marginBottom: 20, marginTop: 20 }}>
                     <Button
                         color='primary'
                         variant='contained'
@@ -141,23 +136,25 @@ class OffertDetails extends React.Component {
                     }
                     {loading && <CircularProgress />}
                 </Grid>
-                <div style={{ width: "60vw" }}>
-                    <form style={{ marginBottom: 20 }} onSubmit={this.createComment}>
-                        <TextField
-                            variant="filled"
-                            fullWidth
-                            label="Agrega tu comentario"
-                            color="primary"
-                            required
-                            onChange={this.setComment}
-                            value={comment}
-                        />
-                    </form>
-                    {sendingComment && <LinearProgress style={{ marginBottom: 10 }} />}
-                    {loadingComments ?
-                        (<LoadingComments />) : (<Comments comments={comments} />)
-                    }
-                </div>
+                <Grid item md={12} sm={12} lg={12}>
+                    <div style={{ width: "60vw" }}>
+                        <form style={{ marginBottom: 20 }} onSubmit={this.createComment}>
+                            <TextField
+                                variant="filled"
+                                fullWidth
+                                label="Agrega tu comentario"
+                                color="primary"
+                                required
+                                onChange={this.setComment}
+                                value={comment}
+                            />
+                        </form>
+                        {sendingComment && <LinearProgress style={{ marginBottom: 10 }} />}
+                        {loadingComments ?
+                            (<LoadingComments />) : (<Comments comments={comments} />)
+                        }
+                    </div>
+                </Grid>
                 <Snackbar
                     open={showSnack}
                     autoHideDuration={6000}

@@ -58,27 +58,18 @@ export default class ServiceService {
 
         }
     }
-    async searchOfferts(offertTitle) {
-        try {
-            const _oferts = []
-            const _offert = await this.serviciosCollection.where("keywords", "array-contains", String(offertTitle).toLowerCase()).get()
-            _offert.forEach((r) => {
-                const offertModel = new OfertModel({ id: r.id, ...r.data() })
-                _oferts.push(offertModel);
-
-            })
-            console.log('_offerts', _oferts);
-            return mapResponse(true, _oferts)
-        } catch (error) {
-            return mapResponse(false, error.message)
-
-        }
-    }
+    
     async getMyServices() {
         try {
+            console.log('user id',getUserid());
             const _services = []
-            const _serviceRes = await this.serviciosCollection.where("userId_own", "==", getUserid()).get()
-            _serviceRes.forEach((r) => {
+            const _myserviceRes = await this.serviciosCollection.where("userId_own", "==", getUserid()).get()
+            const _otherserviceRes = await this.serviciosCollection.where("user_guest", "==", getUserid()).get()
+            _myserviceRes.forEach((r) => {
+                const offertModel = new ServiceModel({ ...r.data(), id: r.id, })
+                _services.push(offertModel);
+            })
+            _otherserviceRes.forEach((r) => {
                 const offertModel = new ServiceModel({ ...r.data(), id: r.id, })
                 _services.push(offertModel);
             })
