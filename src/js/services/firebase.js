@@ -1,7 +1,9 @@
 import firebase from 'firebase';
 import { saveToken, saveUserid, getUserid, saveUserInfo } from "./storage";
+import { UserModel } from '../models';
+import { mapResponse } from '../utils/mapResponse';
 
-const  apiKey  = process.env.REACT_APP_APIKEY
+const apiKey = process.env.REACT_APP_APIKEY
 export const login = async (email, password) => {
     try {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
@@ -84,6 +86,24 @@ export function traslateFirebaseMessageError(errorMessage) {
     }
 }
 
+
+/**
+     * 
+     * @param {UserModel} usuario 
+     */
+
+export async function createUser(usuario) {
+    try {
+        const response = await firebase.firestore().collection('usuarios').add({
+            ...usuario
+        })
+        console.log("create user response", response);
+        return mapResponse(true, response);
+    } catch (error) {
+        return mapResponse(false, error.message);
+    }
+}
+
 export async function updateUser({ name, avatar, email }) {
 
     try {
@@ -108,7 +128,7 @@ export async function getUsers() {
         const users = [];
         _users.forEach(doc => {
             const docData = doc.data()
-            users.push({ email: docData.email, id: doc.id, name: docData.name })
+            users.push({ email: docData.email, id: docData.id, name: docData.name })
 
         })
         console.log(users);
@@ -126,12 +146,11 @@ export async function getUsers() {
 export async function getUser() {
     try {
         const id = getUserid()
-        const userCollection = firebase.firestore().collection('usuarios').doc(id)
-        const _users = await userCollection.get()
-        saveUserInfo({
-            email: _users.data().email,
-            avatar: _users.data().avatar
-        })
+        const userCollection = await firebase.firestore().collection('usuarios').where("id", "==", id).get()
+        const userData = userCollection.docs[0].data()
+        const userModel = new UserModel({ ...userData })
+        saveUserInfo(userModel)
+        return mapResponse(true, userModel)
     }
     catch (error) {
         console.log('error get users', error.message);
@@ -155,9 +174,23 @@ export async function getUserById(id) {
 }
 export async function updateUserById(id, { name }) {
     try {
-        const userCollection = firebase.firestore().collection('usuarios').doc(id)
-        const _users = await userCollection.update({ name })
-        return { success: true, res: _users };
+        const userDocument = await  firebase.firestore().collection('usuarios').where("id", "==", id).get()
+        const docId =  await userDocument.docs[0].ref.update({ name })
+        console.log(docId);
+        return { success: true, res: docId };
+
+    } catch (error) {
+        console.log('error get users', error.message);
+        return { success: false, res: error.message };
+    }
+
+}
+export async function deleteUserById(id) {
+    try {
+        const userDocument = await  firebase.firestore().collection('usuarios').where("id", "==", id).get()
+        const docId =  await userDocument.docs[0].ref.delete()
+        console.log(docId);
+        return { success: true, res: docId };
 
     } catch (error) {
         console.log('error get users', error.message);
