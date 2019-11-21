@@ -84,7 +84,7 @@ class OffertDetails extends React.Component {
         return (
             <Grid container component='main' className={'offert-details-container'}>
                 <Grid item sm={12} >
-                    <Typography style={{marginBottom:10}} variant="h4">{this.offertModel.title}</Typography>
+                    <Typography style={{ marginBottom: 10 }} variant="h4">{this.offertModel.title}</Typography>
                 </Grid>
                 <Grid item sm={10} >
                     <div className="contact-data">
@@ -123,13 +123,17 @@ class OffertDetails extends React.Component {
                         Atras
                       </Button>
 
-                    {!loading && <Button
-                        color='secondary'
-                        variant='contained'
-                        size='medium'
-                        onClick={this.applyOffert}>
-                        Aplicar oferta
-                     </Button>}
+                    {!loading &&
+                        (getUserid() !== this.offertModel.userId && (
+                            <Button
+                                color='secondary'
+                                variant='contained'
+                                size='medium'
+                                onClick={this.applyOffert}>
+                                Aplicar oferta
+                          </Button>
+                        ))
+                    }
                     {loading && <CircularProgress />}
                 </Grid>
                 <div style={{ width: "60vw" }}>
