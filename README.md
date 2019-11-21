@@ -23,6 +23,11 @@ Esta plataforma te permitirá contratar albañiles, plomeros y cualquier otro ti
 !['Pruebas unitarias'](assets/prueba-unitaria.png)
 
 
+## Variables de entorno
+Dentro del proyecto se encuentra un archivo `.env` que contiene todas las variables de configuración, incluyendo las de **firebase**. Estas deben seguir la forma `REACT_APP_<Nombre>` para que pueda funcionar.
+
+Luego para acceder a ellas se debe hacer por medio de `process.env`
+>  Más info [https://create-react-app.dev/docs/adding-custom-environment-variables/](https://create-react-app.dev/docs/adding-custom-environment-variables/)
 
 
 ## ¿Como se despliega?
