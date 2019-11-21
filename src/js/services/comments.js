@@ -20,8 +20,8 @@ export default class CommentService {
             const response = await this.commentsCollection.add({
                 ...commentModel
             })
-            console.log("create comment response", response);
-            return mapResponse(true, response);
+           
+            return mapResponse(true, response.id);
         } catch (error) {
             return mapResponse(false, error.message);
         }
@@ -31,12 +31,12 @@ export default class CommentService {
 
     /**
      * 
-     * @param {OfertModel} offert 
+     * @param {CommentModel} comment 
      */
-    async updateComment(offert) {
+    async updateComment(comment) {
         try {
-            const _offert = this.commentsCollection.doc(offert.id)
-            await _offert.set(offert.toObject(), { merge: true })
+            const _result = this.commentsCollection.doc(comment.id)
+            await _result.set({ comment:comment.comment }, { merge: true })
             return mapResponse(true, "ok")
         } catch (error) {
             return mapResponse(false, error.message)
@@ -67,7 +67,7 @@ export default class CommentService {
             const _coments = []
             const _result = await this.commentsCollection.where("offertId", "==", offertModel.id).get()
             _result.forEach((r) => {
-                const offertModel = new CommentModel({ ...r.data(), id: r.id,  })
+                const offertModel = new CommentModel({ ...r.data(), id: r.id, })
                 _coments.push(offertModel);
 
             })

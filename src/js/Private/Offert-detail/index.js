@@ -52,6 +52,7 @@ class OffertDetails extends React.Component {
         const response = await this.commentService.createComment(commentModel)
         this.setState({ sendingComment: false })
         if (response.success) {
+            commentModel.id = response.res;
             this.setState({
                 comment: '',
                 comments: [commentModel, ...this.state.comments,]
@@ -82,8 +83,8 @@ class OffertDetails extends React.Component {
         const { loading, showSnack, comment, comments, sendingComment } = this.state;
         return (
             <Grid container component='main' className={'offert-details-container'}>
-                <Grid item sm={12}>
-                    <Typography variant="h4">{this.offertModel.title}</Typography>
+                <Grid item sm={12} >
+                    <Typography style={{marginBottom:10}} variant="h4">{this.offertModel.title}</Typography>
                 </Grid>
                 <Grid item sm={10} >
                     <div className="contact-data">
