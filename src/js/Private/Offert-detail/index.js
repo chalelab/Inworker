@@ -9,6 +9,7 @@ import CommentService from '../../services/comments';
 import ServiceService from '../../services/service';
 import { getUserid } from '../../services/storage';
 import Comments from './components/comments';
+import LoadingComments from './components/loading-comments';
 
 class OffertDetails extends React.Component {
     constructor(props) {
@@ -23,7 +24,8 @@ class OffertDetails extends React.Component {
             comment: '',
             sendingComment: false,
             showSnack: false,
-            loading: false
+            loading: false,
+            loadingComments: true,
 
         }
     }
@@ -32,7 +34,9 @@ class OffertDetails extends React.Component {
     }
 
     getComments = async () => {
+        this.setState({ loadingComments: true })
         const response = await this.commentService.getComments(this.offertModel)
+        this.setState({ loadingComments: false })
         console.log('response', response);
         if (response.success) {
             this.setState({ comments: response.res })
@@ -80,7 +84,8 @@ class OffertDetails extends React.Component {
     setComment = ({ target }) => this.setState({ comment: target.value })
 
     render() {
-        const { loading, showSnack, comment, comments, sendingComment } = this.state;
+        const { loading, showSnack, comment, comments, sendingComment, loadingComments } = this.state;
+        
         return (
             <Grid container component='main' className={'offert-details-container'}>
                 <Grid item sm={12} >
@@ -149,7 +154,9 @@ class OffertDetails extends React.Component {
                         />
                     </form>
                     {sendingComment && <LinearProgress style={{ marginBottom: 10 }} />}
-                    <Comments comments={comments} />
+                    {loadingComments ?
+                        (<LoadingComments />) : (<Comments comments={comments} />)
+                    }
                 </div>
                 <Snackbar
                     open={showSnack}
