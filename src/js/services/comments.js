@@ -1,22 +1,22 @@
 import firebase from 'firebase';
 
 import _ from 'lodash';
-import OfertModel from "../models/offert";
+import { OfertModel } from "../models";
 import { mapResponse } from '../utils/mapResponse';
 import { getUserid } from './storage';
 
-export default class OffertService {
+export default class CommentService {
 
     constructor() {
-        this.offertsCollection = firebase.firestore().collection('ofertas')
+        this.commentsCollection = firebase.firestore().collection('comentarios')
     }
     /**
      * 
      * @param {OfertModel} offert 
      */
-    async createOffert(offert) {
+    async createComment(offert) {
         try {
-            const response = await this.offertsCollection.add({
+            const response = await this.commentsCollection.add({
                 title: String(offert.title).toLowerCase(),
                 active: true,
                 userId: getUserid(),
@@ -57,9 +57,9 @@ export default class OffertService {
      * 
      * @param {OfertModel} offert 
      */
-    async updateOffert(offert) {
+    async updateComment(offert) {
         try {
-            const _offert = this.offertsCollection.doc(offert.id)
+            const _offert = this.commentsCollection.doc(offert.id)
             await _offert.set(offert.toObject(), { merge: true })
             return mapResponse(true, "ok")
         } catch (error) {
@@ -67,28 +67,14 @@ export default class OffertService {
 
         }
     }
-    /**
-     * 
-     * @param {OfertModel} offert 
-     */
-    async closeOffert(offert) {
-        try {
-            const _offert = this.offertsCollection.doc(offert.id)
-            await _offert.set({ active: false }, { merge: true })
-            return mapResponse(true, "ok")
-        } catch (error) {
-            return mapResponse(false, error.message)
-
-        }
-    }
 
     /**
      * 
      * @param {OfertModel} offert 
      */
-    async deleteOffert(offert) {
+    async deleteComment(offert) {
         try {
-            const _offert = this.offertsCollection.doc(offert.id)
+            const _offert = this.commentsCollection.doc(offert.id)
             await _offert.delete()
             return mapResponse(true, "ok")
         } catch (error) {
@@ -96,10 +82,10 @@ export default class OffertService {
 
         }
     }
-    async searchOfferts(offertTitle) {
+    async searchComments(offertTitle) {
         try {
             const _oferts = []
-            const _offert = await this.offertsCollection.where("keywords", "array-contains", String(offertTitle).toLowerCase()).get()
+            const _offert = await this.commentsCollection.where("keywords", "array-contains", String(offertTitle).toLowerCase()).get()
             _offert.forEach((r) => {
                 const offertModel = new OfertModel({ id: r.id, ...r.data() })
                 _oferts.push(offertModel);
@@ -115,7 +101,7 @@ export default class OffertService {
     async getMyOfferts() {
         try {
             const _oferts = []
-            const _offert = await this.offertsCollection.where("userId", "==", getUserid()).get()
+            const _offert = await this.commentsCollection.where("userId", "==", getUserid()).get()
             _offert.forEach((r) => {
                 const offertModel = new OfertModel({ id: r.id, ...r.data() })
                 _oferts.push(offertModel);

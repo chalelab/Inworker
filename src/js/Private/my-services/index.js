@@ -1,18 +1,18 @@
 import React from 'react';
-import { Tabs, Tab, Box, Typography, CardActions, IconButton, CircularProgress } from '@material-ui/core';
-import OffertService from '../../services/offerts';
-import { Provider, Consumer } from '../../services/OffertContext'
-import OffertItem from './components/offert-item';
+import { Tabs, Tab, Box, Typography, CircularProgress } from '@material-ui/core';
+import queryString from 'query-string';
+import { Provider, Consumer } from '../../services/ServiceContext'
 import Tab1 from './Tab-active';
 import Tab2 from './Tab-inactive';
-import { OfertModel } from '../../models';
+import ServiceService from '../../services/service';
+// import { OfertModel } from '../../models';
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
-export default function MyOfferts(props) {
+export default function MyServices(props) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -22,25 +22,27 @@ export default function MyOfferts(props) {
      * 
      * @param {OfertModel} offert 
      */
-    const deleteOffert = (getOfferts) => (offert) => async () => {
+    const deleteService = (getMyServices) => (service) => async () => {
         // eslint-disable-next-line no-restricted-globals
-        const deleteOffert = confirm(`¿ Esta seguro que deseas borrar ${offert.title}`);
-        if (deleteOffert) {
-            const offertService = new OffertService()
-            const response = await offertService.deleteOffert(offert)
+        const shouldDelete = confirm(`¿ Esta seguro que deseas borrar el servicio ${service.title}`);
+        if (shouldDelete) {
+            const serviceService = new ServiceService()
+            const response = await serviceService.deleteService(service)
             if (response.success) {
-                getOfferts()
+                getMyServices()
             } else {
                 alert("No pudo borrar")
+                console.log(response);
             }
         }
     }
     /**
     * 
-    * @param {OfertModel} offert 
+    * @param {} offert 
     */
-    const editOffert = (offert) => () => {
-        props.history.push(`my-offerts-edit?id=${offert.id}&title=${offert.title}&price=${offert.price}&details=${offert.details}`)
+    const editService = (offert) => () => {
+        const params = queryString.stringify(offert)
+        props.history.push(`my-services-edit?${params}`)
 
     }
 
@@ -56,7 +58,7 @@ export default function MyOfferts(props) {
                     <Tab label="Cerradas" {...a11yProps(1)} />
                 </Tabs>
                 <Consumer>
-                    {({ loading, getOfferts }) => {
+                    {({ loading, getMyServices }) => {
                         if (loading) return (
                             <div className="loading-results-container">
                                 <CircularProgress className="circular-progress" />
@@ -67,14 +69,14 @@ export default function MyOfferts(props) {
                             <div>
                                 <TabPanel value={value} index={0}>
                                     <Tab1
-                                        onDelete={deleteOffert(getOfferts)}
-                                        onEdit={editOffert}
+                                        onDelete={deleteService(getMyServices)}
+                                        onEdit={editService}
                                     />
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
                                     <Tab2
-                                        onDelete={deleteOffert(getOfferts)}
-                                        onEdit={editOffert}
+                                        onDelete={deleteService(getMyServices)}
+                                        onEdit={editService}
                                     />
                                 </TabPanel>
                             </div>
