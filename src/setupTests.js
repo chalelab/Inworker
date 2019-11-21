@@ -12,3 +12,8 @@ jest.mock("firebase", () => ({
         }
     }
 }))
+
+/**
+ * Deshabilitaando  console.log en las pruebas
+ */
+console.log = () => { }

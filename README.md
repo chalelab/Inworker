@@ -7,6 +7,24 @@ Esta plataforma te permitirá contratar albañiles, plomeros y cualquier otro ti
 [https://inworkerss.firebaseapp.com/](https://inworkerss.firebaseapp.com/)
 
 
+## Entidades
+ * Usuario
+ * Oferta
+ * Comentario
+ * Servicio
+
+## Pruebas unitarias de las entidades `Jest`
+
+
+`create-react-app` ya viene con un configuración lista para realizar pruebas con `Jest`.
+
+ 1. Cada archivo `.test.js` esta dentro de la carpeta de servicios
+ 2. Para ejecutar todas las pruebas unitarios ejecutar  del terminal `npm test`.
+!['Pruebas unitarias'](assets/prueba-unitaria.png)
+
+
+
+
 ## ¿Como se despliega?
 1. Instalar firebase globalmente
 ### `npm install firebase-tools --global`
