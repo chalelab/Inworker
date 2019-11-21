@@ -61,7 +61,7 @@ function ResultItem({ title, onClick,price }) {
     return (
         <Grid item xs={12} onClick={onClick} className="result-item-container">
             <Paper className="result-item-content" >
-                <Typography variant='h4'>
+                <Typography variant='h6'>
                     {title}
                 </Typography>
                 <Typography >

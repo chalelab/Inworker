@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tabs, Tab, Box, Typography, CardActions, IconButton, CircularProgress } from '@material-ui/core';
+import queryString from 'querystring';
 import OffertService from '../../services/offerts';
 import { Provider, Consumer } from '../../services/OffertContext'
 import OffertItem from './components/offert-item';
@@ -43,6 +44,15 @@ export default function MyOfferts(props) {
         props.history.push(`my-offerts-edit?id=${offert.id}&title=${offert.title}&price=${offert.price}&details=${offert.details}`)
 
     }
+    /**
+    * 
+    * @param {OfertModel} offert 
+    */
+    const onOpen = (offert) => () => {
+        const params = queryString.stringify(offert)
+        props.history.push(`offert-details?${params}`)
+
+    }
 
 
     return (
@@ -69,12 +79,14 @@ export default function MyOfferts(props) {
                                     <Tab1
                                         onDelete={deleteOffert(getOfferts)}
                                         onEdit={editOffert}
+                                        onOpen={onOpen}
                                     />
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
                                     <Tab2
                                         onDelete={deleteOffert(getOfferts)}
                                         onEdit={editOffert}
+                                        onOpen={onOpen}
                                     />
                                 </TabPanel>
                             </div>

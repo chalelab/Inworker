@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, CardHeader, CardContent, Typography, CardActions, IconButton } from '@material-ui/core';
-import { Edit, Delete } from '@material-ui/icons';
+import { Edit, Delete,RemoveRedEye } from '@material-ui/icons';
 
-export default function OffertItem({ title, price, details, onEdit, onDelete }) {
+export default function OffertItem({ title, price, details, onEdit, onDelete,onOpen }) {
     return (
         <Card style={{ minWidth: 200, height: "fit-content", margin: 10, minHeight: 40, width: 300 }}>
             <CardHeader title={title} />
@@ -15,6 +15,9 @@ export default function OffertItem({ title, price, details, onEdit, onDelete }) 
                 </Typography>
             </CardContent>
             <CardActions >
+                <IconButton  onClick={onOpen} >
+                    <RemoveRedEye />
+                </IconButton>
                 <IconButton color="primary" onClick={onEdit} >
                     <Edit />
                 </IconButton>
